@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="card formulario">
+    <form method="POST">
+
+        <div class="campo">
+            <label for="titulo-desejo">Título do desejo</label>
+            <input 
+                type="text" 
+                name="titulo-desejo" 
+                id="titulo-desejo"
+                value="{{ tarefa_selecionada.titulo_tarefa if tarefa_selecionada else '' }}"
+                required
+            >
+            <small>Use um nome descritivo para a tarefa.</small>
+        </div>
+
+        <div class="campo">
+            <label for="data-conclusao">Data de conclusão</label>
+            <input 
+                type="date" 
+                name="data-conclusao" 
+                id="data-conclusao"
+                value="{{ tarefa_selecionada.data_conclusao if tarefa_selecionada else '' }}"
+            >
+        </div>
+
+        <button type="submit">
+            {{ 'Atualizar' if tarefa_selecionada else 'Adicionar' }}
+        </button>
+
+    </form>
+</section>
+
+<!-- Lista de tarefas -->
+<h2>Lista de Desejos</h2>
+
+{% if tarefas %}
+<section id="lista-de-tarefas">
+    {% for tarefa in tarefas %}
+    <div class="card-tarefa">
+
+        <p>{{ tarefa.titulo_tarefa }}</p>
+        <span class="data">
+            {{ tarefa.data_conclusao or 'Sem data definida' }}
+        </span>
+
+        <div class="acoes">
+            <a href="{{ url_for('update', idTarefa=tarefa.id_tarefa) }}">Editar</a>
+            <a href="{{ url_for('delete', idTarefa=tarefa.id_tarefa) }}">Apagar</a>
+        </div>
+
+    </div>
+    {% endfor %}
+</section>
+{% else %}
+<p class="vazio">Nada adicionado à Lista de Desejos.</p>
+{% endif %}
+
+{% endblock %}
