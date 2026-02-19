@@ -1,6 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <p>Seja bem-vindo!</p>
-    <a href="/lista">Lista de Desejos</a>
+    <section class="card">
+        <h2>Bem-vindo à Lista de Desejos 🎬</h2>
+        <p>Adicione filmes, séries, jogos e livros que você ainda quer assistir/ler.</p>
+
+        <a href="{{ url_for('lista') }}" class="botao">
+            Acessar Lista
+        </a>
+    </section>
 {% endblock %}

@@ -4,54 +4,56 @@
 
 <section class="card formulario">
     <form method="POST">
-
         <div class="campo">
-            <label for="titulo-desejo">Título do desejo</label>
+            <label for="titulo">Título</label>
             <input 
                 type="text" 
-                name="titulo-desejo" 
-                id="titulo-desejo"
-                value="{{ tarefa_selecionada.titulo_tarefa if tarefa_selecionada else '' }}"
+                id="titulo" 
+                name="titulo"
+                value="{{ item.titulo if item else '' }}"
                 required
             >
-            <small>Use um nome descritivo para a tarefa.</small>
         </div>
 
         <div class="campo">
-            <label for="data-conclusao">Data de conclusão</label>
+            <label for="tipo">Tipo</label>
             <input 
-                type="date" 
-                name="data-conclusao" 
-                id="data-conclusao"
-                value="{{ tarefa_selecionada.data_conclusao if tarefa_selecionada else '' }}"
+                type="text" 
+                id="tipo" 
+                name="tipo"
+                value="{{ item.tipo if item else '' }}"
+                required
+            >
+        </div>
+
+        <div class="campo">
+            <label for="indicado_por">Indicado por</label>
+            <input 
+                type="text" 
+                id="indicado_por" 
+                name="indicado_por"
+                value="{{ item.indicado_por if item else '' }}"
             >
         </div>
 
         <button type="submit">
-            {{ 'Atualizar' if tarefa_selecionada else 'Adicionar' }}
+            {{ 'Atualizar' if item else 'Adicionar' }}
         </button>
-
     </form>
 </section>
 
-<!-- Lista de tarefas -->
-<h2>Lista de Desejos</h2>
+<h2>Minha Lista</h2>
 
-{% if tarefas %}
+{% if lista %}
 <section id="lista-de-tarefas">
-    {% for tarefa in tarefas %}
+    {% for item in lista %}
     <div class="card-tarefa">
-
-        <p>{{ tarefa.titulo_tarefa }}</p>
-        <span class="data">
-            {{ tarefa.data_conclusao or 'Sem data definida' }}
-        </span>
-
+        <p>{{ item.titulo }} ({{ item.tipo }})</p>
+        <span class="data">{{ item.indicado_por or 'Não informado' }}</span>
         <div class="acoes">
-            <a href="{{ url_for('update', idTarefa=tarefa.id_tarefa) }}">Editar</a>
-            <a href="{{ url_for('delete', idTarefa=tarefa.id_tarefa) }}">Apagar</a>
+            <a href="{{ url_for('editar', id=item.id) }}">Editar</a>
+            <a href="{{ url_for('delete', id=item.id) }}">Apagar</a>
         </div>
-
     </div>
     {% endfor %}
 </section>

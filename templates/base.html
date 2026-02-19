@@ -6,12 +6,16 @@
     <title>{{ titulo }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
+<body>
+
     <header>
-    <h1>{{ titulo }}</h1>
+        <h1>{{ titulo }}</h1>
     </header>
 
     <main class="container">
-            {% block content %}{% endblock %}
+        {% block content %}{% endblock %}
     </main>
+
 </body>
 </html>

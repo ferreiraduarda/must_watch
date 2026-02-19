@@ -6,7 +6,7 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(120deg, #f1f1f1, #e0e0e0);
+    background: linear-gradient(135deg, #c1f0f6, #ffffff);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -14,27 +14,31 @@ body {
 }
 
 header {
-    margin: 30px 0;
+    margin: 40px 0;
     text-align: center;
 }
 
 header h1 {
-    font-size: 2.3rem;
-    color: #024336c2;
+    font-size: 2.8rem;
+    color: #024336;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
 }
 
 .container {
-    width: 800px;
-    background: #fff;
+    width: 90%;
+    max-width: 900px;
+    background: #ffffffcc;
     padding: 30px 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    backdrop-filter: blur(5px);
 }
 
 .formulario form {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 20px;
 }
 
 .campo {
@@ -44,77 +48,93 @@ header h1 {
 }
 
 .campo label {
-    font-weight: bold;
+    font-weight: 600;
+    color: #034d4d;
 }
 
 .campo input {
-    padding: 10px;
-    border-radius: 5px;
+    padding: 12px;
+    border-radius: 8px;
     border: 1px solid #ccc;
+    transition: all 0.3s;
 }
 
-.campo small {
-    font-size: 12px;
-    color: #666;
+.campo input:focus {
+    border-color: #08a396;
+    box-shadow: 0 0 5px #08a39633;
+    outline: none;
 }
 
 button {
-    padding: 10px;
+    padding: 12px;
     background-color: #035646;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     font-weight: bold;
     cursor: pointer;
+    transition: all 0.3s;
 }
 
 button:hover {
     background-color: #08a396;
+    transform: translateY(-2px);
 }
 
 h2 {
     text-align: center;
-    margin: 30px 0 20px;
+    margin: 40px 0 20px;
     color: #054b4b;
 }
 
 #lista-de-tarefas {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 25px;
+    justify-items: center;
 }
 
 .card-tarefa {
-     flex: 1 1 220px;    
-    min-width: 220px; 
-    max-width: 220px; 
-    min-height: 120px;
-    background: #f9f9f9;
+    background: #ffffffdd;
     border-left: 5px solid #054b4b;
-    border-radius: 8px;
+    border-radius: 12px;
     padding: 15px;
     text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: all 0.3s;
+}
+
+.card-tarefa:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.card-tarefa img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    object-fit: cover;
 }
 
 .card-tarefa p {
     font-weight: bold;
     color: #054b4b;
+    margin-bottom: 5px;
 }
 
 .card-tarefa .data {
     font-size: 14px;
     color: #555;
+    margin-bottom: 10px;
 }
 
 .acoes {
     display: flex;
     justify-content: center;
-    gap: 10px;
+    gap: 15px;
     margin-top: 10px;
 }
 
@@ -123,13 +143,16 @@ h2 {
     font-size: 14px;
     color: #035646;
     font-weight: bold;
+    transition: color 0.3s;
 }
 
 .acoes a:hover {
-    text-decoration: underline;
+    color: #08a396;
 }
 
 .vazio {
     text-align: center;
     color: #777;
+    font-style: italic;
+    margin-top: 20px;
 }
