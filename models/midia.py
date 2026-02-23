@@ -1,14 +1,14 @@
 from models.database import DB_PATH, init_db
 import sqlite3
-
+from typing import Optional, Self
 init_db()
 
 def conectar():
     return sqlite3.connect(DB_PATH)
 
 class Midia:
-    def __init__(self, titulo, tipo, indicado_por=None, id=None):
-        self.id = id
+    def __init__(self, titulo, tipo, indicado_por=None, id_midia: Optional[int] =None) -> None:
+        self.id_midia: Optional[int] =  id_midia
         self.titulo = titulo
         self.tipo = tipo
         self.indicado_por = indicado_por
@@ -21,27 +21,27 @@ class Midia:
             )
 
     def atualizar(self):
-        if self.id is None:
+        if self.id_midia is None:
             return
         with conectar() as con:
             con.execute(
                 "UPDATE midias SET titulo=?, tipo=?, indicado_por=? WHERE id=?",
-                (self.titulo, self.tipo, self.indicado_por, self.id)
+                (self.titulo, self.tipo, self.indicado_por, self.id_midia)
             )
 
     def excluir(self):
-        if self.id is None:
+        if self.id_midia is None:
             return
         with conectar() as con:
-            con.execute("DELETE FROM midias WHERE id=?", (self.id,))
+            con.execute("DELETE FROM midias WHERE id=?", (self.id_midia,))
 
-    @staticmethod
-    def id(id):
+    @classmethod
+    def id(cls, id: int) -> Self:
         with conectar() as con:
             dado = con.execute("SELECT * FROM midias WHERE id=?", (id,)).fetchone()
         if dado is None:
-            return None
-        return Midia(dado[1], dado[2], dado[3], dado[0])
+            raise ValueError
+        return cls(dado[1], dado[2], dado[3], dado[0])
 
     @staticmethod
     def obter_todos():
