@@ -25,7 +25,7 @@ class Midia:
             return
         with conectar() as con:
             con.execute(
-                "UPDATE midias SET titulo=?, tipo=?, indicado_por=? WHERE id=?",
+                "UPDATE midias SET titulo=?, tipo=?, indicado_por=? WHERE id_midia=?",
                 (self.titulo, self.tipo, self.indicado_por, self.id_midia)
             )
 
@@ -33,12 +33,12 @@ class Midia:
         if self.id_midia is None:
             return
         with conectar() as con:
-            con.execute("DELETE FROM midias WHERE id=?", (self.id_midia,))
+            con.execute("DELETE FROM midias WHERE id_midia=?", (self.id_midia,))
 
     @classmethod
     def id(cls, id: int) -> Self:
         with conectar() as con:
-            dado = con.execute("SELECT * FROM midias WHERE id=?", (id,)).fetchone()
+            dado = con.execute("SELECT * FROM midias WHERE id_midia=?", (id,)).fetchone()
         if dado is None:
             raise ValueError
         return cls(dado[1], dado[2], dado[3], dado[0])
